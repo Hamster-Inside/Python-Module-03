@@ -1,2 +1,2 @@
 # Python-Module-03
-Code reminding someone to return borrowed items by e-mail.
+Code reminding someone about deadlines by e-mail.
