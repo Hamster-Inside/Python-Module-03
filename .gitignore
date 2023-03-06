@@ -130,3 +130,5 @@ dmypy.json
 
 project_info/
 .idea/
+Knowledge/
+Knowledge/baza.db
