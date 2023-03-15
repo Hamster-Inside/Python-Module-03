@@ -1,33 +1,12 @@
 import sqlite3
-import logging
+from my_logger import MyLogger
 from datetime import datetime
-
-logger = logging.getLogger('DB_Log')
-logger.setLevel(logging.DEBUG)
-
-# create file handler and set level to debug
-fh = logging.FileHandler('my_log_file.log')
-fh.setLevel(logging.DEBUG)
-
-# create console handler and set level to debug
-ch = logging.StreamHandler()
-ch.setLevel(logging.DEBUG)
-
-# create formatter
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-
-# add formatter to handlers
-fh.setFormatter(formatter)
-ch.setFormatter(formatter)
-
-# add handlers to logger
-logger.addHandler(fh)
-logger.addHandler(ch)
 
 
 class DatabaseConnection:
 
     def __init__(self, db_path):
+        logger = MyLogger('DB LOG', 'my_log_file.log').get_logger()
         self.db_path = db_path
         self.conn = self.__create_connection()
         self.cursor = self.__create_cursor()
