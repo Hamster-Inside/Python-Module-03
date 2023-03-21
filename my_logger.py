@@ -16,8 +16,9 @@ class MyLogger:
         ch.setLevel(logging.DEBUG)
 
         # create formatter
-        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-
+        formatter = logging.Formatter(
+            '%(asctime)s,%(msecs)03d - %(name)s - [%(filename)s:%(lineno)d]- %(levelname)s - %(message)s',
+            '%Y-%m-%d %H:%M:%S')
         # add formatter to handlers
         fh.setFormatter(formatter)
         ch.setFormatter(formatter)
@@ -28,3 +29,5 @@ class MyLogger:
 
     def get_logger(self):
         return self.logger
+
+
