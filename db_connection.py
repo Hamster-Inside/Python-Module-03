@@ -5,7 +5,7 @@ from datetime import datetime
 
 class DatabaseConnection:
 
-    def __init__(self, db_path, log_name, log_file):
+    def __init__(self, db_path: str, log_name: str, log_file: str):
         self.logger = MyLogger(log_name, log_file).get_logger()
         self.db_path = db_path
         self.conn = self.__create_connection()
@@ -80,3 +80,14 @@ class DatabaseConnection:
                             'VALUES (?, ?, FALSE, ?, ?)',
                             (part_number, quantity, current_date, deadline))
         self.conn.commit()
+
+    def get_all_parts(self):
+        self.cursor.execute('SELECT part_number FROM parts')
+        response = self.cursor.fetchall()
+        list_of_all_parts = []
+        for row in response:
+            if list_of_all_parts.__contains__(row[0]):
+                self.logger.warn(f'Multiple part in database: {row[0]}')
+                continue
+            list_of_all_parts.append(row[0])
+        return list_of_all_parts
