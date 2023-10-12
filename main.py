@@ -5,10 +5,9 @@ from dotenv import load_dotenv
 from collections import namedtuple
 
 if __name__ == '__main__':
-    db = DatabaseConnection('mod3_database_01.db')
-    db.set_loggers('PARTS DB', 'my_log_file.log')
-
     load_dotenv()
+    db = DatabaseConnection(getenv('DB_FILE'), 'PARTS DB', 'my_log_file.log')
+
     Credentials = namedtuple('Credentials', 'username, password')
     credentials = Credentials(getenv('EMAIL'), getenv('GMAIL_PASSWORD_FOR_APPLICATION'))
     ssl_enabled = getenv('SSL_ENABLED')
