@@ -41,13 +41,13 @@ class DatabaseConnection:
     def get_part_quantity(self, connection, part_number):
         with Database(connection) as db:
             db.cursor.execute('SELECT part_quantity FROM parts WHERE part_number=?', (part_number,))
-            quantity = int(self.cursor.fetchall()[0][0])
+            quantity = int(db.cursor.fetchall()[0][0])
             return quantity
 
     def get_part_finished_status(self, connection, part_number):
         with Database(connection) as db:
             db.cursor.execute('SELECT finished FROM parts WHERE part_number=?', (part_number,))
-            finished_status = bool(self.cursor.fetchall()[0][0])
+            finished_status = bool(db.cursor.fetchall()[0][0])
             return finished_status
 
     def set_part_finished(self, connection, part_number, finished_status):
