@@ -6,11 +6,15 @@ from database import Database
 
 class DatabaseConnection:
 
-    def __init__(self, db_path: str):
+    def __init__(self, db_path: str ,log_name='', log_file=''):
         self.db_path = db_path
-        self.set_loggers('TEMP_LOG', 'TEMP_LOG.log')
+        self.set_loggers(log_name, log_file)
 
     def set_loggers(self, log_name: str, log_file: str):
+        if log_name == '':
+            log_name = 'TEMP_LOG'
+        if log_file == '':
+            log_file = 'TEMP_LOG.log'
         self.logger = MyLogger(log_name, log_file).get_logger()
 
     def create_connection(self):
